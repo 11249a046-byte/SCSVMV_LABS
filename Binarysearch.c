@@ -1,4 +1,4 @@
-#include <stdio.h>
+
 
 /*
 ===========================================================
@@ -29,68 +29,94 @@ using Binary Search technique.
 ===========================================================
 */
 
-int binarySearch(int arr[], int size, int target) {
-    int left = 0, right = size - 1;
-    while (left <= right) {
-        int mid = left + (right - left) / 2;
+#include<stdio.h>
+int main()
+{
+    int i, j, low = 0, high, mid, n, key, sort, found = 0;
 
-        if (arr[mid] == target)
-            return mid;
-        else if (arr[mid] < target)
-            left = mid + 1;
-        else
-            right = mid - 1;
-    }
-    return -1;
-}
-
-int main() {
-    int n, target;
-    printf("Binary Search Program\n");
-    printf("Enter number of elements: ");
+    // Ask user how many elements to store
+    printf("\n enter how many elements do you want to store:\n");
     scanf("%d", &n);
 
-    int arr[n];
-    printf("Enter %d sorted numbers:\n", n);
-    for (int i = 0; i < n; i++) {
-        scanf("%d", &arr[i]);
+    // Declare array of size n
+    int a[n];
+
+    // Input array elements
+    printf("\n enter %d elements:\n", n);
+    for(i = 0; i < n; i++)
+    {
+        scanf("%d", &a[i]);
     }
 
-    printf("Enter number to search: ");
-    scanf("%d", &target);
+    // Display given/unsorted data
+    printf("\n given data:\n");
+    for(i = 0; i < n; i++)
+    {
+        printf("\n %d", a[i]);
+    }
 
-    int result = binarySearch(arr, n, target);
+    // Sorting the array (Using simple comparison sort)
+    for(i = 0; i < n; i++)
+    {
+        for(j = 0; j < i + 1; j++)
+        {
+            // If current element is smaller, swap them
+            if(a[i] < a[j])
+            {
+                sort = a[i];
+                a[i] = a[j];
+                a[j] = sort;
+            }
+        }
+    }
 
-    if (result != -1)
-        printf("Number found at index %d\n", result);
-    else
-        printf("Number not found\n");
+    // Display sorted array
+    printf("\nsorted array:\n");
+    for(i = 0; i < n; i++)
+    {
+        printf("\n %d", a[i]);
+    }
 
-    return 0;
+    // Input key to search
+    printf("\n enter the key to search:\n");
+    scanf("%d", &key);
+
+    // Binary search initialization
+    low = 0;
+    high = n - 1;
+
+    // Binary search loop
+    while(low < high)
+    {
+        // Find middle index
+        mid = (low + high) / 2;
+
+        // If middle element is the key
+        if(a[mid] == key)
+        {
+            printf("\n key found at index: %d", mid + 1); // +1 for position
+            found = 1;
+            break;
+        }
+
+        // If key is greater, search in right half
+        if(a[mid] < key)
+        {
+            low = mid + 1;
+            high = n - 1;
+        }
+
+        // If key is smaller, search in left half
+        if(a[mid] > key)
+        {
+            low = 0;
+            high = mid - 1;
+        }
+    }
+
+    // If key was not found
+    if(found == 0)
+    {
+        printf("\n element not found");
+    }
 }
-
-/*
-===========================================================
-                        OUTPUT
-===========================================================
-
-Example 1:
------------
-Binary Search Program
-Enter number of elements: 5
-Enter 5 sorted numbers:
-10 20 30 40 50
-Enter number to search: 30
-Number found at index 2
-
-Example 2:
------------
-Binary Search Program
-Enter number of elements: 5
-Enter 5 sorted numbers:
-10 20 30 40 50
-Enter number to search: 25
-Number not found
-
-===========================================================
-*/
