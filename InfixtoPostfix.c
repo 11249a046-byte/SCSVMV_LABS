@@ -1,9 +1,3 @@
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-
-#define MAX 100
-
 /*
 ===========================================================
                         AIM
@@ -45,100 +39,138 @@ using stack operations.
 ===========================================================
 */
 
-char stack[MAX];
-int top = -1;
+#include <stdio.h>
+#include <stdlib.h>
 
-void push(char c) {
-    stack[++top] = c;
-}
+int TOP = -1, MAX;
+char *STACK;
 
-char pop() {
-    return (top == -1) ? '\0' : stack[top--];
-}
-
-int priority(char c) {
-    if (c == '+' || c == '-') return 1;
-    if (c == '*' || c == '/') return 2;
-    return 0;
-}
-
-void infixToPostfix(char infix[], char postfix[]) {
-    int k = 0;
-    for (int i = 0; infix[i] != '\0'; i++) {
-        char c = infix[i];
-        if (isalnum(c))
-            postfix[k++] = c;
-        else if (c == '(')
-            push(c);
-        else if (c == ')') {
-            while (top != -1 && stack[top] != '(')
-                postfix[k++] = pop();
-            pop();
-        } else {
-            while (top != -1 && priority(stack[top]) >= priority(c))
-                postfix[k++] = pop();
-            push(c);
-        }
+void Display()
+{
+    printf("Current Stack elements are -");
+    for (int i = 0; i <= TOP; i++)
+    {
+        printf("[%c,]", STACK[i]);
     }
-    while (top != -1)
-        postfix[k++] = pop();
-    postfix[k] = '\0';
+    printf("\n");
 }
 
-int evalPostfix(char *postfix) {
-    int s[MAX], t = -1;
-    for (int i = 0; postfix[i] != '\0'; i++) {
-        char c = postfix[i];
-        if (isdigit(c))
-            s[++t] = c - '0';
-        else {
-            int b = s[t--], a = s[t--];
-            switch (c) {
-                case '+': s[++t] = a + b; break;
-                case '-': s[++t] = a - b; break;
-                case '*': s[++t] = a * b; break;
-                case '/': s[++t] = a / b; break;
-            }
-        }
+void Push(char item)
+{
+    if (TOP == MAX - 1)
+    {
+        printf("Stack is overflow");
     }
-    return s[t];
+    else
+    {
+        TOP = TOP + 1;
+        STACK[TOP] = item;
+    }
 }
 
-int main() {
-    char infix[MAX], postfix[MAX];
-    printf("Enter infix expression: ");
+char Pop()
+{
+    if (TOP == -1)
+    {
+        printf("Stack is underflow / empty\n");
+        return '\0';
+    }
+    else
+    {
+        char item = STACK[TOP];
+        TOP = TOP - 1;
+        return item;
+    }
+}
+
+char Peek()
+{
+    if (TOP == -1)
+    {
+        // printf("Stack is underflow / empty\n");
+        return '\0';
+    }
+    else
+    {
+        return STACK[TOP];
+    }
+}
+
+int GetPrecedence(char op)
+{
+    switch (op)
+    {
+    case '+':
+    case '-':
+        return 1; // lowest precedence
+    case '*':
+    case '/':
+        return 2;
+    case '^':
+        return 3; // highest precedence
+    default:
+        return 0; // consider it as operand
+    }
+}
+
+int main()
+{
+    printf("Enter the size of infix expression: ");
+    scanf("%d", &MAX);
+
+    STACK = (char *)malloc(MAX * sizeof(char));
+    char infix[MAX];
+    char postfix[MAX];
+
+    printf("Please enter the infix string of size %d: ", MAX);
     scanf("%s", infix);
 
-    infixToPostfix(infix, postfix);
+    int TokenPrecedence, j = 0, i = 0;
+    char c, temp;
 
-    printf("Postfix expression: %s\n", postfix);
-    printf("Result: %d\n", evalPostfix(postfix));
+    // Reading one token at a time
+    while ((c = infix[i]) != '\0')
+    // for (int i = 0; i < MAX; i++)
+    {
+        // c = infix[i];
+        TokenPrecedence = GetPrecedence(c); // Current token at a time
+        if (TokenPrecedence > 0)            // Current token is Operator
+        {
+            while (TokenPrecedence <= GetPrecedence(Peek())) // Current Token <= Stack Top Token
+            {
+                postfix[j++] = Pop();
+            }
+            Push(c);
+        }
+        else // Current token is operand or '(' or ')'
+        {
+            switch (c)
+            {
+            case '(':
+                Push(c);
+                break;
+            case ')':
+                while (Peek() != '(')
+                {
+                    postfix[j++] = Pop();
+                }
+                Pop();
+                break;
+            default:
+                postfix[j++] = c;
+                break;
+            }
+        }
+        i++;
+    }
 
+    // Pop All remaining tokens from stack
+    while (Peek() != '\0')
+    {
+        char c = Pop();
+        postfix[j++] = c;
+    }
+    postfix[j] = '\0';
+    printf("Postfix notation is : %s", postfix);
     return 0;
 }
-
-/*
-===========================================================
-                        OUTPUT
-===========================================================
-
-Example 1:
------------
-Enter infix expression: 3+5*2
-Postfix expression: 352*+
-Result: 13
-
-Example 2:
------------
-Enter infix expression: (4+2)*3
-Postfix expression: 42+3*
-Result: 18
-
-Example 3:
------------
-Enter infix expression: 9-5+2
-Postfix expression: 95-2+
-Result: 6
-
-===========================================================
-*/
