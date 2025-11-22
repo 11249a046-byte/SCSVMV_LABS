@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <string.h>
-
 /*
 ===========================================================
                         AIM
@@ -27,58 +24,63 @@ without using the built-in strrev() function.
                         PROGRAM
 ===========================================================
 */
+#include <stdio.h>
+#include <stdlib.h>
 
-void reverseString(char *text) {
-    int start = 0;
-    int end = strlen(text) - 1;
+int top = -1;       // Top pointer of stack (initially empty)
+int size;           // Size of string (and stack)
+char *STACK;        // Dynamic array for stack
 
-    while (start < end) {
-        char temp = text[start];
-        text[start] = text[end];
-        text[end] = temp;
-        start++;
-        end--;
+// Function to push a character into stack
+void push(char item)
+{
+    // Overflow condition: when top reaches last index
+    if (top == (size - 1))
+    {
+        printf("Stack is already full, no additional push allowed - Overflow");
+    }
+    else
+    {
+        top = top + 1;         // Increase top
+        STACK[top] = item;     // Insert character
     }
 }
 
-int main() {
-    char input[256];
-    printf("Enter a string: ");
+// Function to pop and return a character from stack
+char pop()
+{
+    char temp = STACK[top];    // Take the top element
+    top = top - 1;             // Move top backward
+    return temp;               // Return popped character
+}
 
-    if (fgets(input, sizeof(input), stdin)) {
-        size_t length = strlen(input);
-        if (length > 0 && input[length - 1] == '\n') {
-            input[length - 1] = '\0'; // Remove newline character
-        }
+int main()
+{
+    // Ask user for string size
+    printf("Enter the size of string to reverse: ");
+    scanf("%d", &size);
 
-        reverseString(input);
-        printf("Reversed string: %s\n", input);
-    } else {
-        printf("Error reading input.\n");
+    char input[size];          // Array to store user string
+
+    // Allocate memory for stack dynamically
+    STACK = (char *)malloc(size * sizeof(char));
+
+    // Input the string
+    printf("Enter the string of size %d to reverse: ", size);
+    scanf("%s", input);
+
+    // Push each character of string into stack
+    for (int i = 0; i <= size - 1; i++)
+    {
+        push(input[i]);
+    }
+
+    // Pop all characters to print reversed string
+    printf("Reversed string is - \n");
+    for (int i = 0; i <= size - 1; i++)
+    {
+        printf("%c", pop());
     }
 
     return 0;
 }
-
-/*
-===========================================================
-                        OUTPUT
-===========================================================
-
-Example 1:
------------
-Enter a string: hello
-Reversed string: olleh
-
-Example 2:
------------
-Enter a string: programming
-Reversed string: gnimmargorp
-
-Example 3:
------------
-Enter a string: Sandeep Kumar
-Reversed string: ramuK peednaS
-
-===========================================================
-*/
