@@ -91,4 +91,36 @@ int main() {
         printf("3. PEEK\n");
         printf("4. DISPLAY\n");
         printf("5. Exit\n");
-        printf("Enter your
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+        case 1:
+            printf("Enter value to push: ");
+            scanf("%d", &data);
+            Push(&top, data);
+            break;
+
+        case 2:
+            Pop(&top);
+            break;
+
+        case 3:
+            Peek(top);
+            break;
+
+        case 4:
+            Display(top);
+            break;
+
+        case 5:
+            printf("Exiting...\n");
+            exit(0);
+
+        default:
+            printf("Invalid choice! Try again.\n");
+        }
+    }
+
+    return 0;
+}
