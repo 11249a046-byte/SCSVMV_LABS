@@ -1,0 +1,120 @@
+Experiment No. 1  : Introduction to Various Data Visualization Tools
+
+Aim:
+To study various data visualization tools and display the installed versions of commonly used Python
+visualization libraries.
+
+Description:
+Data visualization is the process of representing data in graphical form such as charts, graphs, plots
+and dashboards. Visualization tools make complex datasets easier to understand and help users
+identify trends, patterns and relationships. Common tools used in this laboratory are Matplotlib,
+Seaborn, Plotly, Pandas, R and Tableau.
+
+Uses:
+• To understand large and complex datasets easily.
+• To identify trends, patterns and relationships.
+• To communicate analytical results effectively.
+• To create charts, graphs and interactive visualizations.
+• To support data-driven decision making.
+
+Algorithm:
+1. Import the required visualization libraries.
+2. Display the version of each library.
+3. Execute the program.
+4. Observe the output.
+
+Program:
+import matplotlib
+import seaborn
+import plotly
+import pandas
+print("Matplotlib:", matplotlib.__version__)
+print("Seaborn:", seaborn.__version__)
+print("Plotly:", plotly.__version__)
+print("Pandas:", pandas.__version__)
+
+Program Explanation:
+
+• import matplotlib loads the Matplotlib library.
+• import seaborn loads Seaborn for statistical visualization.
+• import plotly loads Plotly for interactive visualization.
+• import pandas loads Pandas for data handling.
+• version displays the installed version of each library.
+
+Libraries Used and Their Uses:
+
+Table 1: Commonly Used Python Visualization Libraries
+
+Library                                             Use
+Matplotlib            Creates line charts, bar charts, scatter plots and other graphs.
+Seaborn               Creates attractive statistical and analytical visualizations.
+Plotly                Creates interactive charts and dashboards.
+Pandas                Loads, cleans, transforms and analyzes tabular data.
+
+Introduction to Data Analytics using Python:
+Data analytics is the process of collecting, organizing, analyzing, and interpreting data to extract meaningful information and support decision-making. 
+In today's digital world, large amounts of data are generated through social media, online transactions, health care systems, businesses, and various digital platforms. 
+This data plays a significant role in improving business performance and creating valuable data-driven products and services.
+Data is important because it helps organizations identify trends, understand customer behavior, improve operational efficiency, and make informed decisions. 
+Data analytics has become an essential part of many industries due to the increasing demand for data-driven solutions.
+The major types of data analytics are descriptive, diagnostic, predictive, and prescriptive analytics.
+Descriptive analytics explains what has happened, diagnostic analytics identifies why it happened, predictive analytics forecasts future outcomes based on historical data, 
+and prescriptive analytics recommends the best course of action. These classifications help organizations solve different types of business problems effectively.
+Analytics refers to the process of examining data to understand a particular problem or situation, whereas analytics involves using statistical techniques, computational tools, 
+and data-driven methods to generate insights and support decision-making. The field of data analytics combines data collection, processing, analysis, visualization, and interpretation to produce meaningful results.
+The growing demand for data analytics has increased the need for skilled professionals such as data analysts and data scientists. 
+A data analyst focuses on collecting, cleaning, and interpreting data to generate reports and insights, while a data scientist works on advanced analytical models, machine learning techniques, 
+and predictive systems. Both roles require skills in programming, statistics, data visualization, problem-solving, and effective communication.
+Data can be classified based on different types of variables and measurement levels. The four levels of data measurement are nominal, ordinal, interval, and ratio scales.
+Nominal data represents categories without any specific order. Ordinal data represents ordered categories. Interval data consists of equal intervals without a true zero value, 
+and ratio data includes equal intervals with a true zero point. Understanding these measurement scales is important for selecting appropriate statistical methods and analytical techniques.
+The choice of measurement scale directly affects data collection, analysis, interpretation, and the validity of conclusions drawn from the data.
+Proper identification of data types and measurement levels ensures accurate and meaningful analytical results.
+Data Visualization Tools:
+Data visualization tools help present data in a visual form so that it is easy to understand and analyze. They are used to identify patterns, trends, and relationships in data. Some commonly used tools are:
+Matplotlib
+Seaborn
+Plotly
+Tableau
+Power BI
+Google Data Studio
+Microsoft Excel
+Jupyter Notebook
+
+Classification of Data Analytics:
+Data Warehouse:
+   Development of data product
+   Discovery of data insights
+Analytics
+Qualitative:
+   Intuition + analysis
+   Exploring how and why
+Quantitative:
+   Formula + algorithms
+   Data + how
+Types of Data Analytics:
+Descriptive Analytics – explains what has happened.
+Diagnostic Analytics – identifies why it happened.
+Predictive Analytics – forecasts what may happen in the future.
+Prescriptive Analytics – recommends the best course of action.
+The difficulty and value of analysis generally increase from descriptive to diagnostic, predictive, and prescriptive analytics.
+Predictive Analytics
+Historical Data → Predictive Algorithm → Model
+New Data → Model → Predictions
+Elements of Data Analytics
+
+Data analytics combines different areas such as:
+
+Statistics
+Data Mining
+Business Intelligence
+Visualization
+Simulation
+Modelling & Optimization
+What-if Analysis
+
+Result:
+
+Thus, the versions of the commonly used Python data visualization libraries were displayed successfully.Data analytics using Python helps in understanding data and converting it into useful information. 
+It covers topics such as types of data analytics, data measurement scales, data visualization, and the role of data analysts and data scientists. Python and Jupyter Notebook make data analysis simple and efficient. 
+Data analytics is important in many fields because it helps in making better decisions and solving real-world problems.
